@@ -4,12 +4,13 @@ public class User {
     private String userId;
     private int dailyGoal;
     private HashMap<String, IntakeLog> userLogs;
-    private IntakeLog log = new IntakeLog();
+    private IntakeLog log;
     private ProgressBar progress = new ProgressBar();
 
     public User(String userId) {
         this.userId = userId;
         this.progress = new ProgressBar();
+        this.log = new IntakeLog();
 
         if (userLogs == null) {
             userLogs = new HashMap<>();
@@ -40,11 +41,19 @@ public class User {
             return "No logs found for user: " + userId;
         }
     }
+
+    public IntakeLog getLogObject(String userId) {
+        return userLogs.get(userId);
+    }
     
     public ProgressBar getProgressBar() {
         return this.progress;
     }
 
+    public void updateProgressBar() {
+        this.progress.updateProgress();
+    }
+    
     public void updateProgressBar(int value) {
         this.progress.updateProgress(value);
     }

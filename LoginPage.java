@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -14,6 +15,7 @@ import javax.swing.border.EmptyBorder;
 
 public class LoginPage extends JFrame {
     JTextField userIdField = new JTextField(20);
+    private HashMap<String, GUI> userLogs = new HashMap<>();
 
     public LoginPage() {
         setTitle("Login");
@@ -55,8 +57,17 @@ public class LoginPage extends JFrame {
         public void actionPerformed(ActionEvent e) {
             String userId = userIdField.getText();
 
-            // open new GUI window
-            new GUI(userId);
+            // check if a GUI instance already exists for this userId
+            GUI existingGui = userLogs.get(userId);
+            if (existingGui == null) {
+                // if not create a new GUI instance
+                existingGui = new GUI(userId, LoginPage.this);
+                userLogs.put(userId, existingGui);
+            }
+
+            // check if GUI instance is null
+            // new GUI(userId);
+            existingGui.setVisible(true);
             setVisible(false);
         }
     }

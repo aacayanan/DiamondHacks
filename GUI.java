@@ -9,9 +9,12 @@ public class GUI extends JFrame {
     private JTextField inputField = new JTextField(20);
     private User user = new User(userId);
     JTextArea logArea = new JTextArea(5, 10);
+    private IntakeLog currentLog = user.getLogObject(userId);
+    private LoginPage loginPage;
 
-    public GUI(String userId) {
+    public GUI(String userId, LoginPage loginPage) {
         this.userId = userId;
+        this.loginPage = loginPage;
 
         setTitle("ScurvyScout");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,7 +74,9 @@ public class GUI extends JFrame {
 
         // panel for progress bar
         // ProgressBar progress = new ProgressBar();
+        user.updateProgressBar();
         ProgressBar guiProgress = user.getProgressBar();
+        user.updateProgressBar();
         progressPanel.add(leftValue, BorderLayout.WEST);
         progressPanel.add(guiProgress.progressBar, BorderLayout.CENTER);
         progressPanel.add(rightValue, BorderLayout.EAST);
@@ -82,6 +87,11 @@ public class GUI extends JFrame {
         // panel for the logs
         JPanel logPanel = new JPanel();
         logArea.setEditable(false);
+        if (currentLog != null) {
+            logArea.setText(currentLog.getEntries());
+        } else {
+            logArea.setText("No logs found for user: " + userId);
+        }
         JScrollPane logScroll = new JScrollPane(logArea);
         logScroll.setPreferredSize(new Dimension(200, 80));
         logPanel.add(logScroll);
@@ -124,7 +134,7 @@ public class GUI extends JFrame {
             dispose();
 
             // create new instance of the login page
-            LoginPage loginPage = new LoginPage();
+            // LoginPage loginPage = new LoginPage();
             loginPage.setVisible(true);
         }
 }

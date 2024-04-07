@@ -16,6 +16,9 @@ public class ProgressBar {
         progressBar.setStringPainted(true);
     }
 
+    public void updateProgress() {
+        progressBar.setValue(currentProgress);
+    }
     public void updateProgress(int progress) {
         currentProgress += progress;
         progressBar.setValue(currentProgress);
