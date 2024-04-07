@@ -1,4 +1,5 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagLayout;
@@ -25,15 +26,16 @@ public class LoginPage extends JFrame {
         setSize(600, 400);
         setResizable(false);
         setLayout(new GridBagLayout());
+        setBackground(new Color(221, 161, 94));
         
         // CENTER PANEL
         JPanel panelCenter = new JPanel();
         panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
-        JLabel title = new JLabel("<html>Welcome to ScurvyScout!<br>Enter User ID:</html>");
+        JLabel title = new JLabel("<html>Ahoy to ScurvyScout!<br>Chart yer identity:</html>");
         JButton loginButton = new JButton("Login");
 
-        title.setFont(new Font("Arial", Font.PLAIN, 25));
-        title.setBorder(new EmptyBorder(0, 0, 0, 30));
+        title.setFont(new Font("Arial", Font.ITALIC, 24));
+        title.setBorder(new EmptyBorder(0, 0, 0, 50));
 
         loginButton.addActionListener(new LoginButtonListener());
 

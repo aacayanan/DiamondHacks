@@ -21,9 +21,9 @@ public class IntakeLog {
         StringBuilder sb = new StringBuilder();
         for (IntakeEntry entry : entries) {
             sb.append(entry.getTimestamp())
-              .append(" ")
+              .append(" : ")
               .append(entry.getFoodItem())
-              .append(" ")
+              .append(" : ")
               .append(entry.getVitaminAmount())
               .append("\n");
         }

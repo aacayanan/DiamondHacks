@@ -1,7 +1,11 @@
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 public class GUI extends JFrame {
     private String userId;
@@ -11,7 +15,7 @@ public class GUI extends JFrame {
     private IntakeLog currentLog = user.getLogObject(userId);
     private LoginPage loginPage;
     private JLabel warningLabel = new JLabel("<html><div style='text-align: center'>BEWARE, ye scallywag!<br>! YE BE COURSIN' TOWARDS SCURVY !<BR>Hoist the sails and set course for more Vitamin C</div></html>");
-    private JLabel goalMetLabel = new JLabel("<html><div style='text-align: center'>Ahoy, shipmate! Ye have met yer daily goal for Vitamin C!<br>Shiver me timbers, looks like ye won't be joinin' the ranks o' scurvy sea dogs today!</div></html>");
+    private JLabel goalMetLabel = new JLabel("<html><div style='text-align: center'>Ahoy, shipmate! Ye have met yer daily goal for Vitamin C!<br>Shiver me timbers, looks like ye won't<br>be joinin' the ranks o' scurvy sea dogs today!</div></html>");
 
     public GUI(String userId, LoginPage loginPage) {
         this.userId = userId;
@@ -33,11 +37,16 @@ public class GUI extends JFrame {
         JPanel panelTop = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JLabel welcomeLabel = new JLabel("Ahoy, " + userId + "!");
         JButton logoutButton = new JButton("Logout");
-        logoutButton.setPreferredSize(new Dimension(50, 25));
-        logoutButton.setFont(new Font("Arial", Font.ITALIC, 8));
+        // logoutButton.setPreferredSize(new Dimension(50, 25));
+        // logoutButton.setFont(new Font("Arial", Font.ITALIC, 8));
         logoutButton.addActionListener(new LogoutButtonListener());
         panelTop.add(welcomeLabel);
         panelTop.add(logoutButton);
+
+        // end log
+        JButton endLogButton = new JButton("End Log");
+        endLogButton.addActionListener(new EndLogButtonListener());
+        panelTop.add(endLogButton);
 
         JLabel header = new JLabel("Logbook o' Daily Vitamin SEA");
         header.setFont(new Font("Arial", Font.PLAIN, 30));
@@ -72,7 +81,7 @@ public class GUI extends JFrame {
         warningLabel.setForeground(Color.RED);
         warningLabel.setFont(new Font("Arial", Font.BOLD, 18));
         // JLabel goalMetLabel = new JLabel("You have met your daily goal of Vitamin C! Looks like you won't be getting scurvy today!");
-        goalMetLabel.setForeground(Color.GREEN);
+        goalMetLabel.setForeground(new Color(124,181,24));
         goalMetLabel.setFont(new Font("Arial", Font.BOLD, 18));
         updateLabelVisibility();
         warningPanel.add(warningLabel, BorderLayout.CENTER);
@@ -91,7 +100,11 @@ public class GUI extends JFrame {
         panelCenter.add(warningPanel);
 
         // panel for the logs
+        JPanel panelTextArea = new JPanel();
+        panelTextArea.setLayout(new BoxLayout(panelTextArea, BoxLayout.Y_AXIS));
+        JLabel labelFormat = new JLabel("Date : Time : Food : Vitamin C");
         JPanel logPanel = new JPanel();
+        panelTextArea.add(labelFormat);
         logArea.setEditable(false);
         if (currentLog != null) {
             logArea.setText(currentLog.getEntries());
@@ -100,6 +113,9 @@ public class GUI extends JFrame {
         }
         JScrollPane logScroll = new JScrollPane(logArea);
         logScroll.setPreferredSize(new Dimension(200, 80));
+        // logPanel.add(panelTextArea);
+        panelTextArea.setBorder(new EmptyBorder(0, 115, 0, 0));
+        panelCenter.add(panelTextArea);
         logPanel.add(logScroll);
         panelCenter.add(logPanel);
 
@@ -144,6 +160,24 @@ public class GUI extends JFrame {
             // create new instance of the login page
             // LoginPage loginPage = new LoginPage();
             loginPage.setVisible(true);
+        }
+    }
+
+    // create private method to handel end log button click
+    private class EndLogButtonListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String logText = logArea.getText();
+            
+            // write the text to a new text file
+            try (PrintWriter out = new PrintWriter("intakelog.txt")) {
+                out.println(logText);
+            } catch (FileNotFoundException ex) {
+                ex.printStackTrace();
+            } finally {
+                dispose();
+                loginPage.setVisible(true);
+            }
         }
     }
 
