@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 public class GPT {
     public static String chatGPT(String message) {
         String url = "https://api.openai.com/v1/chat/completions";
-        String apiKey = "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";
+        String apiKey = "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";
         String model = "gpt-3.5-turbo";
         String primer = ": I gave you the name of a food item or meal and it is your job to return back to me how much Vitamin C is in that meal in mg.  If you do not know the number, output the estimate. Do not give a range. Your output should be: [vitamin C content]";
         try {
