@@ -1,10 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
-// import java.awt.event.FocusAdapter;
-// import java.awt.event.FocusEvent;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GUI extends JFrame {
-    public GUI() {
+    private String userId;
+    private JTextField inputField = new JTextField(20);
+    private User user = new User(userId);
+    JTextArea logArea = new JTextArea(5, 10);
+
+    public GUI(String userId) {
+        this.userId = userId;
+
         setTitle("ScurvyScout");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
@@ -23,8 +30,8 @@ public class GUI extends JFrame {
         // SOUTH PANEL
         JPanel inputPanel = new JPanel();
         JButton submitButton = new JButton("Submit");
-        JTextField inputField = new JTextField(20);
         JLabel inputLabel = new JLabel("Enter food item: ");
+        submitButton.addActionListener(new SubmitButtonListener());
         inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.X_AXIS));
         inputPanel.add(inputField);
         inputPanel.add(submitButton);
@@ -47,13 +54,21 @@ public class GUI extends JFrame {
         warningPanel.add(warningLabel, BorderLayout.CENTER);
 
         // panel for progress bar
-        ProgressBar progress = new ProgressBar(100);
+        ProgressBar progress = new ProgressBar();
         progressPanel.add(leftValue, BorderLayout.WEST);
         progressPanel.add(progress.progressBar, BorderLayout.CENTER);
         progressPanel.add(rightValue, BorderLayout.EAST);
         
         panelCenter.add(progressPanel);
         panelCenter.add(warningPanel);
+
+        // panel for the logs
+        JPanel logPanel = new JPanel();
+        logArea.setEditable(false);
+        JScrollPane logScroll = new JScrollPane(logArea);
+        logScroll.setPreferredSize(new Dimension(200, 80));
+        logPanel.add(logScroll);
+        panelCenter.add(logPanel);
 
         // ADD PANELS TO FRAME
         add(panelNorth, BorderLayout.NORTH);
@@ -62,7 +77,19 @@ public class GUI extends JFrame {
         setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new GUI();
+    // create a private class for the submit button listener
+    private class SubmitButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // get the food item from the input field
+            String foodItem = inputField.getText();
+            // get the vitamin amount from the food item
+            int vitaminAmount = 30;
+            // update the user's intake log
+            user.updateIntake(userId, foodItem, vitaminAmount);
+            // update the JTextArea with the new log
+            logArea.setText(user.getLogs(userId));
+        }
     }
 }

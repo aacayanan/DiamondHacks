@@ -1,4 +1,5 @@
-import java.sql.Date;
+import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class IntakeEntry {
     private static int lastEntryId = 0;
@@ -11,7 +12,23 @@ public class IntakeEntry {
         this.entryId = ++lastEntryId;
         this.foodItem = foodItem;
         this.vitaminAmount = vitaminAmount;
-        this.timestamp = new Date(System.currentTimeMillis());
+        this.timestamp = new Date();
     }
 
+    public int getEntryId() {
+        return entryId;
+    }
+    
+    public String getFoodItem() {
+        return foodItem;
+    }
+
+    public int getVitaminAmount() {
+        return vitaminAmount;
+    }
+
+    public String getTimestamp() {
+        SimpleDateFormat date = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        return date.format(this.timestamp);
+    }
 }

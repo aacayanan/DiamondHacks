@@ -6,8 +6,8 @@ public class ProgressBar {
     private int currentProgress;
     public JProgressBar progressBar;
 
-    public ProgressBar(int goal) {
-        this.goal = goal;
+    public ProgressBar() {
+        this.goal = 90;
         this.currentProgress = 0;
 
         progressBar = new JProgressBar(currentProgress, this.goal);
@@ -19,5 +19,13 @@ public class ProgressBar {
     public void updateProgress(int progress) {
         currentProgress += progress;
         progressBar.setValue(currentProgress);
+    }
+
+    public int getProgress() {
+        return currentProgress;
+    }
+
+    public int getGoal() {
+        return goal;
     }
 }
