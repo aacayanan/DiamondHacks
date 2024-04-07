@@ -1,4 +1,3 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -78,7 +77,6 @@ public class LoginPage extends JFrame {
             }
 
             // check if GUI instance is null
-            // new GUI(userId);
             existingGui.setVisible(true);
             setVisible(false);
         }

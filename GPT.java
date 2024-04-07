@@ -7,9 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GPT {
-    public static void main(String[] args) {
-        System.out.println(integerVitaminC("apple"));
-    }
     public static String chatGPT(String message) {
         String url = "https://api.openai.com/v1/chat/completions";
         String apiKey = "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";
@@ -17,6 +14,7 @@ public class GPT {
         String primer = ": I gave you the name of a food item or meal and it is your job to return back to me how much Vitamin C is in that meal in mg.  If you do not know the number, output the estimate. Do not give a range. Your output should be: [vitamin C content]";
         try {
             // create the HTTP POST request
+            @SuppressWarnings("deprecation")
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("POST");
@@ -57,7 +55,6 @@ public class GPT {
         String response = chatGPT(foodItem);
         System.out.println(response);
         // remove anything that is not a digit and make it an integer
-        // String output = response.replaceAll("[^\\d]", "").replaceAll("(\\d+).*", "$1");
         Pattern pattern = Pattern.compile("\\d+");
         Matcher matcher = pattern.matcher(response);
 

@@ -37,8 +37,6 @@ public class GUI extends JFrame {
         JPanel panelTop = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         JLabel welcomeLabel = new JLabel("Ahoy, " + userId + "!");
         JButton logoutButton = new JButton("Logout");
-        // logoutButton.setPreferredSize(new Dimension(50, 25));
-        // logoutButton.setFont(new Font("Arial", Font.ITALIC, 8));
         logoutButton.addActionListener(new LogoutButtonListener());
         panelTop.add(welcomeLabel);
         panelTop.add(logoutButton);
@@ -77,10 +75,8 @@ public class GUI extends JFrame {
         panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
 
         // panel for warning message
-        // JLabel warningLabel = new JLabel("<html><div style='text-align: center'>WARNING: You are below your daily goal of Vitamin C.<br>! AT RISK OF SCURVY !<BR>EAT MORE VITAMIN C!</div></html>");
         warningLabel.setForeground(Color.RED);
         warningLabel.setFont(new Font("Arial", Font.BOLD, 18));
-        // JLabel goalMetLabel = new JLabel("You have met your daily goal of Vitamin C! Looks like you won't be getting scurvy today!");
         goalMetLabel.setForeground(new Color(124,181,24));
         goalMetLabel.setFont(new Font("Arial", Font.BOLD, 18));
         updateLabelVisibility();
@@ -88,7 +84,6 @@ public class GUI extends JFrame {
         warningPanel.add(goalMetLabel, BorderLayout.CENTER);
 
         // panel for progress bar
-        // ProgressBar progress = new ProgressBar();
         user.updateProgressBar();
         ProgressBar guiProgress = user.getProgressBar();
         user.updateProgressBar();
@@ -113,7 +108,6 @@ public class GUI extends JFrame {
         }
         JScrollPane logScroll = new JScrollPane(logArea);
         logScroll.setPreferredSize(new Dimension(200, 80));
-        // logPanel.add(panelTextArea);
         panelTextArea.setBorder(new EmptyBorder(0, 115, 0, 0));
         panelCenter.add(panelTextArea);
         logPanel.add(logScroll);
@@ -121,7 +115,6 @@ public class GUI extends JFrame {
 
         // ADD PANELS TO FRAME
         add(panelTopNorth, BorderLayout.PAGE_START);
-        // add(panelNorth, BorderLayout.NORTH);
         add(panelSouth, BorderLayout.SOUTH);
         add(panelCenter, BorderLayout.CENTER);
         setVisible(true);
@@ -142,7 +135,6 @@ public class GUI extends JFrame {
             logArea.setText(user.getLogs(userId));
             // update progress
             user.updateProgressBar(vitaminAmount);
-            // System.out.println("Progress: " + user.getProgressBar().getProgress() + " Goal: " + user.getProgressBar().getGoal());
             // update the label warning
             updateLabelVisibility();
         }
@@ -158,7 +150,6 @@ public class GUI extends JFrame {
             dispose();
 
             // create new instance of the login page
-            // LoginPage loginPage = new LoginPage();
             loginPage.setVisible(true);
         }
     }

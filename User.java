@@ -1,8 +1,8 @@
 import java.util.HashMap;
 
 public class User {
+    @SuppressWarnings("unused")
     private String userId;
-    private int dailyGoal;
     private HashMap<String, IntakeLog> userLogs;
     private IntakeLog log;
     private ProgressBar progress = new ProgressBar();
@@ -29,7 +29,6 @@ public class User {
         } else {
             userLogs.put(userId, log);
             updateIntake(userId, foodItem, vitaminAmount);
-            // progress.updateProgress(vitaminAmount);
         }
     }
 
