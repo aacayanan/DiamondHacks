@@ -54,9 +54,10 @@ public class GUI extends JFrame {
         warningPanel.add(warningLabel, BorderLayout.CENTER);
 
         // panel for progress bar
-        ProgressBar progress = new ProgressBar();
+        // ProgressBar progress = new ProgressBar();
+        ProgressBar guiProgress = user.getProgressBar();
         progressPanel.add(leftValue, BorderLayout.WEST);
-        progressPanel.add(progress.progressBar, BorderLayout.CENTER);
+        progressPanel.add(guiProgress.progressBar, BorderLayout.CENTER);
         progressPanel.add(rightValue, BorderLayout.EAST);
         
         panelCenter.add(progressPanel);
@@ -90,6 +91,9 @@ public class GUI extends JFrame {
             user.updateIntake(userId, foodItem, vitaminAmount);
             // update the JTextArea with the new log
             logArea.setText(user.getLogs(userId));
+            // update progress
+            user.updateProgressBar(vitaminAmount);
+            // System.out.println("Progress: " + user.getProgressBar().getProgress() + " Goal: " + user.getProgressBar().getGoal());
         }
     }
 }

@@ -5,7 +5,7 @@ public class User {
     private int dailyGoal;
     private HashMap<String, IntakeLog> userLogs;
     private IntakeLog log = new IntakeLog();
-    private ProgressBar progress;
+    private ProgressBar progress = new ProgressBar();
 
     public User(String userId) {
         this.userId = userId;
@@ -28,7 +28,7 @@ public class User {
         } else {
             userLogs.put(userId, log);
             updateIntake(userId, foodItem, vitaminAmount);
-            progress.updateProgress(vitaminAmount);
+            // progress.updateProgress(vitaminAmount);
         }
     }
 
