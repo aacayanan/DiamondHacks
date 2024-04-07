@@ -10,8 +10,8 @@ public class GUI extends JFrame {
     JTextArea logArea = new JTextArea(5, 10);
     private IntakeLog currentLog = user.getLogObject(userId);
     private LoginPage loginPage;
-    private JLabel warningLabel = new JLabel("<html><div style='text-align: center'>WARNING: You are below your daily goal of Vitamin C.<br>! AT RISK OF SCURVY !<BR>EAT MORE VITAMIN C!</div></html>");
-    private JLabel goalMetLabel = new JLabel("<html><div style='text-align: center'>You have met your daily goal of Vitamin C!<br>Looks like you won't be getting scurvy today!</div></html>");
+    private JLabel warningLabel = new JLabel("<html><div style='text-align: center'>BEWARE, ye scallywag!<br>! YE BE COURSIN' TOWARDS SCURVY !<BR>Hoist the sails and set course for more Vitamin C</div></html>");
+    private JLabel goalMetLabel = new JLabel("<html><div style='text-align: center'>Ahoy, shipmate! Ye have met yer daily goal for Vitamin C!<br>Shiver me timbers, looks like ye won't be joinin' the ranks o' scurvy sea dogs today!</div></html>");
 
     public GUI(String userId, LoginPage loginPage) {
         this.userId = userId;
@@ -39,7 +39,7 @@ public class GUI extends JFrame {
         panelTop.add(welcomeLabel);
         panelTop.add(logoutButton);
 
-        JLabel header = new JLabel("Daily Vitamin C Intake Tracker");
+        JLabel header = new JLabel("Logbook o' Daily Vitamin SEA");
         header.setFont(new Font("Arial", Font.PLAIN, 30));
         panelNorth.add(header);
 
@@ -50,7 +50,7 @@ public class GUI extends JFrame {
         // SOUTH PANEL
         JPanel inputPanel = new JPanel();
         JButton submitButton = new JButton("Submit");
-        JLabel inputLabel = new JLabel("Enter food item: ");
+        JLabel inputLabel = new JLabel("Chart yer course: ");
         submitButton.addActionListener(new SubmitButtonListener());
         inputPanel.setLayout(new BoxLayout(inputPanel, BoxLayout.X_AXIS));
         inputPanel.add(inputField);
@@ -70,10 +70,10 @@ public class GUI extends JFrame {
         // panel for warning message
         // JLabel warningLabel = new JLabel("<html><div style='text-align: center'>WARNING: You are below your daily goal of Vitamin C.<br>! AT RISK OF SCURVY !<BR>EAT MORE VITAMIN C!</div></html>");
         warningLabel.setForeground(Color.RED);
-        warningLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        warningLabel.setFont(new Font("Arial", Font.BOLD, 18));
         // JLabel goalMetLabel = new JLabel("You have met your daily goal of Vitamin C! Looks like you won't be getting scurvy today!");
         goalMetLabel.setForeground(Color.GREEN);
-        goalMetLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        goalMetLabel.setFont(new Font("Arial", Font.BOLD, 18));
         updateLabelVisibility();
         warningPanel.add(warningLabel, BorderLayout.CENTER);
         warningPanel.add(goalMetLabel, BorderLayout.CENTER);

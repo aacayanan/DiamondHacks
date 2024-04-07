@@ -87,7 +87,7 @@ public class LoginPage extends JFrame {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String info = "<html>Scurvy is a disease that occurs when you have a severe lack of vitamin C in your diet.<br>It causes general weakness, anemia, gum disease, poor wound healing, and skin hemorrhages (Mount Sinai Health).<br>60 mg daily is all that is required to prevent scurvy for healthy adults (Medscape Medicine).</html>";
+            String info = "<html>Scurvy is a disease that occurs when you have a severe lack of vitamin C in your diet.<br>It causes general weakness, anemia, gum disease, poor wound healing, and skin hemorrhages (Mount Sinai Health).<br>60 mg daily is all that is required to prevent scurvy for healthy adults (Medscape Medicine).<br><br>Scurvy be a curse that strikes when ye be severely lackin' vitamin C in yer grub.<br>It brings ye to yer knees with weakness, turns yer blood thin as bilge water, rots yer gums, makes healin' slower than a calm sea,<br>and gives ye skin as spotted as a treasure map (by the accounts o' Mount Sinai Health).<br>A mere 60 mg o' vitamin C each day be all it takes to keep the scurvy at bay for healthy sea dogs (as per the scrolls of Medscape Medicine).</html>";
             JOptionPane.showMessageDialog(null, info, "Information about Scurvy", JOptionPane.INFORMATION_MESSAGE);
         }
 
