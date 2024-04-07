@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.concurrent.Flow;
 
 public class GUI extends JFrame {
     private String userId;
@@ -23,9 +24,24 @@ public class GUI extends JFrame {
         JPanel panelCenter = new JPanel();
 
         // NORTH PANEL
+        JPanel panelTopNorth = new JPanel();
+        panelTopNorth.setLayout(new BoxLayout(panelTopNorth, BoxLayout.Y_AXIS));
+        JPanel panelTop = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        JLabel welcomeLabel = new JLabel("Ahoy, " + userId + "!");
+        JButton logoutButton = new JButton("Logout");
+        logoutButton.setPreferredSize(new Dimension(50, 25));
+        logoutButton.setFont(new Font("Arial", Font.ITALIC, 8));
+        logoutButton.addActionListener(new LogoutButtonListener());
+        panelTop.add(welcomeLabel);
+        panelTop.add(logoutButton);
+
         JLabel header = new JLabel("Daily Vitamin C Intake Tracker");
         header.setFont(new Font("Arial", Font.PLAIN, 30));
-        panelNorth.add(header, BorderLayout.NORTH);
+        panelNorth.add(header);
+
+        // add the top panel and north panel to topnorth panel
+        panelTopNorth.add(panelTop);
+        panelTopNorth.add(panelNorth);
 
         // SOUTH PANEL
         JPanel inputPanel = new JPanel();
@@ -72,7 +88,8 @@ public class GUI extends JFrame {
         panelCenter.add(logPanel);
 
         // ADD PANELS TO FRAME
-        add(panelNorth, BorderLayout.NORTH);
+        add(panelTopNorth, BorderLayout.PAGE_START);
+        // add(panelNorth, BorderLayout.NORTH);
         add(panelSouth, BorderLayout.SOUTH);
         add(panelCenter, BorderLayout.CENTER);
         setVisible(true);
@@ -96,4 +113,19 @@ public class GUI extends JFrame {
             // System.out.println("Progress: " + user.getProgressBar().getProgress() + " Goal: " + user.getProgressBar().getGoal());
         }
     }
+
+    // create private method to handle logout button click
+    private class LogoutButtonListener implements ActionListener {
+            
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // close the GUI window
+            setVisible(false);
+            dispose();
+
+            // create new instance of the login page
+            LoginPage loginPage = new LoginPage();
+            loginPage.setVisible(true);
+        }
+}
 }
