@@ -60,7 +60,7 @@ public class GUI extends JFrame {
 
         // CENTER PANEL
         JLabel leftValue = new JLabel("0mg");
-        JLabel rightValue = new JLabel("90mg");
+        JLabel rightValue = new JLabel("60mg");
         JPanel progressPanel = new JPanel();
         JPanel warningPanel = new JPanel();
 

@@ -7,7 +7,7 @@ public class ProgressBar {
     public JProgressBar progressBar;
 
     public ProgressBar() {
-        this.goal = 90;
+        this.goal = 60;
         this.currentProgress = 0;
 
         progressBar = new JProgressBar(currentProgress, this.goal);

@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridBagLayout;
@@ -9,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -43,6 +45,14 @@ public class LoginPage extends JFrame {
         panelCenter.add(fieldPanel);
 
         add(panelCenter);
+
+        // BOTTOM PANEL
+        JPanel panelBottom = new JPanel();
+        JButton infoButton = new JButton("?");
+        infoButton.addActionListener(new InfoButtonListener());
+        panelBottom.add(infoButton);
+        add(panelBottom);
+
         setVisible(true);
     }
 
@@ -70,5 +80,16 @@ public class LoginPage extends JFrame {
             existingGui.setVisible(true);
             setVisible(false);
         }
+    }
+
+    // create private method to handle info button click
+    private class InfoButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String info = "<html>Scurvy is a disease that occurs when you have a severe lack of vitamin C in your diet.<br>It causes general weakness, anemia, gum disease, poor wound healing, and skin hemorrhages (Mount Sinai Health).<br>60 mg daily is all that is required to prevent scurvy for healthy adults (Medscape Medicine).</html>";
+            JOptionPane.showMessageDialog(null, info, "Information about Scurvy", JOptionPane.INFORMATION_MESSAGE);
+        }
+
     }
 }
