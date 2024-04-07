@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.concurrent.Flow;
 
 public class GUI extends JFrame {
     private String userId;
@@ -11,6 +10,8 @@ public class GUI extends JFrame {
     JTextArea logArea = new JTextArea(5, 10);
     private IntakeLog currentLog = user.getLogObject(userId);
     private LoginPage loginPage;
+    private JLabel warningLabel = new JLabel("<html><div style='text-align: center'>WARNING: You are below your daily goal of Vitamin C.<br>! AT RISK OF SCURVY !<BR>EAT MORE VITAMIN C!</div></html>");
+    private JLabel goalMetLabel = new JLabel("<html><div style='text-align: center'>You have met your daily goal of Vitamin C!<br>Looks like you won't be getting scurvy today!</div></html>");
 
     public GUI(String userId, LoginPage loginPage) {
         this.userId = userId;
@@ -67,10 +68,15 @@ public class GUI extends JFrame {
         panelCenter.setLayout(new BoxLayout(panelCenter, BoxLayout.Y_AXIS));
 
         // panel for warning message
-        JLabel warningLabel = new JLabel("<html><div style='text-align: center'>WARNING: You are below your daily goal of Vitamin C.<br>! AT RISK OF SCURVY !<BR>EAT MORE VITAMIN C!</div></html>");
+        // JLabel warningLabel = new JLabel("<html><div style='text-align: center'>WARNING: You are below your daily goal of Vitamin C.<br>! AT RISK OF SCURVY !<BR>EAT MORE VITAMIN C!</div></html>");
         warningLabel.setForeground(Color.RED);
         warningLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        // JLabel goalMetLabel = new JLabel("You have met your daily goal of Vitamin C! Looks like you won't be getting scurvy today!");
+        goalMetLabel.setForeground(Color.GREEN);
+        goalMetLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        updateLabelVisibility();
         warningPanel.add(warningLabel, BorderLayout.CENTER);
+        warningPanel.add(goalMetLabel, BorderLayout.CENTER);
 
         // panel for progress bar
         // ProgressBar progress = new ProgressBar();
@@ -121,6 +127,8 @@ public class GUI extends JFrame {
             // update progress
             user.updateProgressBar(vitaminAmount);
             // System.out.println("Progress: " + user.getProgressBar().getProgress() + " Goal: " + user.getProgressBar().getGoal());
+            // update the label warning
+            updateLabelVisibility();
         }
     }
 
@@ -137,5 +145,15 @@ public class GUI extends JFrame {
             // LoginPage loginPage = new LoginPage();
             loginPage.setVisible(true);
         }
-}
+    }
+
+    public void updateLabelVisibility() {
+        if (user.getProgressBar().getProgress() < user.getProgressBar().getGoal()) {
+            warningLabel.setVisible(true);
+            goalMetLabel.setVisible(false);
+        } else {
+            warningLabel.setVisible(false);
+            goalMetLabel.setVisible(true);
+        }
+    }
 }
