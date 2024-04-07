@@ -54,8 +54,7 @@ public class GPT {
     }
 
     public static int integerVitaminC(String foodItem) {
-        // String response = chatGPT(foodItem);
-        String response = "The vitamin C content of an apple is 8.4 mg.";
+        String response = chatGPT(foodItem);
         System.out.println(response);
         // remove anything that is not a digit and make it an integer
         // String output = response.replaceAll("[^\\d]", "").replaceAll("(\\d+).*", "$1");

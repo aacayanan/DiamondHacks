@@ -119,7 +119,7 @@ public class GUI extends JFrame {
             // get the food item from the input field
             String foodItem = inputField.getText();
             // get the vitamin amount from the food item
-            int vitaminAmount = 30;
+            int vitaminAmount = GPT.integerVitaminC(foodItem);
             // update the user's intake log
             user.updateIntake(userId, foodItem, vitaminAmount);
             // update the JTextArea with the new log
